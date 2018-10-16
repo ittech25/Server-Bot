@@ -4,10 +4,7 @@ from datetime import datetime
 from subprocess import Popen, PIPE, STDOUT
 import operator
 import collections
-# import sys
 import time
-# import threading
-# import random
 import telepot
 
 shellexecution = []
@@ -72,6 +69,8 @@ class BotPcr(telepot.Bot):
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
                 elif msg['text'] == 'Stop':
                     bot.sendMessage(chat_id, "hentikan semua operasi" ,  reply_markup=hide_keyboard)
+        else:
+            bot.sendMessage(chat_id, "user ini bukan admin")
 
 
 
