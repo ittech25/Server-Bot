@@ -54,7 +54,7 @@ class BotPcr(telepot.Bot):
                             print("Do Nothing")
                     sortedprocs = sorted(procs.items(), key=operator.itemgetter(1), reverse=True)
                     for proc in sortedprocs:
-                        pidsreply += proc[0] + " " + ("%.2f" % proc[1]) + " %\n"
+                        pidsreply += proc[0]  +  "\n"
                     reply = timedif  + "\n" + \
                             cpu_used + "\n" + \
                             memtotal + "\n" + \
