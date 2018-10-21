@@ -12,6 +12,11 @@ shellexecution = []
 stopmarkup = {'keyboard': [['Stop']]}
 hide_keyboard = {'hide_keyboard': True}
 
+def clearsemua(chat_id):
+    if chat_id in shellexecution:
+        shellexecution.remove(chat_id)
+
+
 class BotPcr(telepot.Bot):
     def __init__(self, *args, **kwargs):
         super(BotPcr, self).__init__(*args, **kwargs)
@@ -57,6 +62,9 @@ class BotPcr(telepot.Bot):
                             memuseperc + "\n\nService yang sedang berjalan : \n" + \
                             pidsreply
                     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
+                elif msg['text'] == 'Stop':
+                    clearsemua(chat_id)
+                    bot.sendMessage(chat_id, "hentikan operasi shell" ,  reply_markup=hide_keyboard)
                 elif msg['text'] == '/shell' and chat_id  not in shellexecution:
                     bot.sendMessage(chat_id, "masukan perintah atau command " , reply_markup=stopmarkup)
                     shellexecution.append(chat_id)
@@ -67,8 +75,7 @@ class BotPcr(telepot.Bot):
                         bot.sendMessage(chat_id, output, disable_web_page_preview=True)
                     else:
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
-                elif msg['text'] == 'Stop':
-                    bot.sendMessage(chat_id, "hentikan semua operasi" ,  reply_markup=hide_keyboard)
+
         else:
             bot.sendMessage(chat_id, "user ini bukan admin")
 
