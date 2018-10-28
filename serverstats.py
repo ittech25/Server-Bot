@@ -35,6 +35,7 @@ class BotPcr(telepot.Bot):
                     cpu_percent = psutil.cpu_percent() *10
                     timedif = "Server online salama : %.1f jam" % (((now - boottime).total_seconds()) / 3600)
                     memtotal = "Total memory ram : %.2f GB " % (memory.total / 1000000000)
+                    #memangka = "Memory ram yang dipakai : %.2f GB" % (memory.used / 1000000000)
                     memavail = "Memory ram yang tersedia : %.2f GB" % (memory.available / 1000000000)
                     memuseperc = "Memory ram yang dipakai : " + str(memory.percent) + " %"
                     cpu_used = "Ultilisasi cpu sebanyak : "+ str(cpu_percent) + "%"
