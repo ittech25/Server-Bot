@@ -1,5 +1,5 @@
-# A token you get from the Telegram's botfather
+#token telegram
 telegrambot = '528054963:AAFts4tGKuPXYBBSUCkFSRs_qEpBHfp-l1U'
 
-# A chat_id of your client
+#chat id client
 adminchatid = [487592203,756033147]

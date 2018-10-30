@@ -1,7 +1,7 @@
 from tokens import *
 import psutil
 from datetime import datetime
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import Popen, PIPE, STDOUT,call
 import operator
 import collections
 import time
@@ -76,7 +76,9 @@ class BotPcr(telepot.Bot):
                         bot.sendMessage(chat_id, output, disable_web_page_preview=True)
                     else:
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
-
+                elif msg['text'] == '/mail':
+                    security = str(call(["tail", "/var/mail/root"]))
+                    bot.sendMessage(chat_id,security)
         else:
             bot.sendMessage(chat_id, "user ini bukan admin")
 
