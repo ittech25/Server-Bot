@@ -77,8 +77,9 @@ class BotPcr(telepot.Bot):
                     else:
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
                 elif msg['text'] == '/mail':
-                    security = str(call(["tail", "/var/mail/root"]))
-                    bot.sendMessage(chat_id,security)
+                    p = subprocess.Popen(['tail', '/var/mail/root'], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                    out, err = p.communicate()
+                    bot.sendMessage(chat_id,out)
         else:
             bot.sendMessage(chat_id, "user ini bukan admin")
 
