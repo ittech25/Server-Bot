@@ -79,14 +79,8 @@ class BotPcr(telepot.Bot):
                     else:
                         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
                 elif msg['text'] == '/mail':
-                    while True:
-                        if os.stat("mail").st_size == 0:
-                            pass
-                        else:
-                            p = subprocess.Popen(['tail', '/home/tronic/serverbot/mail'], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-                            out, err = p.communicate()
-                            bot.sendMessage(chat_id,out)
-                            open('mail','w').close()
+                    pass
+
         else:
             bot.sendMessage(chat_id, "user ini bukan admin")
 
@@ -95,6 +89,13 @@ class BotPcr(telepot.Bot):
 TOKEN = telegrambot
 bot = BotPcr(TOKEN)
 bot.message_loop()
-
 while 1:
+    if os.stat("mail").st_size == 0:
+        pass
+    else:
+        for adminchatid2 in adminchatid:
+            p = subprocess.Popen(['tail', '/home/tronic/serverbot/mail'], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            out, err = p.communicate()
+            bot.sendMessage(adminchatid2,out)
+        open('mail','w').close()
     time.sleep(1)
