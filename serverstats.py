@@ -38,7 +38,7 @@ class BotPcr(telepot.Bot):
                     timedif = "Server online salama : %.1f jam" % (((now - boottime).total_seconds()) / 3600)
                     memtotal = "Total memory ram : %.2f GB " % (memory.total / 1000000000)
                     #memangka = "Memory ram yang dipakai : %.2f GB" % (memory.used / 1000000000)
-                    memavail = "Memory ram yang tersedia : %.2f GB" % (memory.available / 1000000000)
+                    memavail = "Memory ram yang tersedia : %.2f MB" % (memory.available / 1000000)
                     memuseperc = "Memory ram yang dipakai : " + str(memory.percent) + " %"
                     cpu_used = "Ultilisasi cpu sebanyak : "+ str(cpu_percent) + "%"
                     pids = psutil.pids()
@@ -90,12 +90,12 @@ TOKEN = telegrambot
 bot = BotPcr(TOKEN)
 bot.message_loop()
 while 1:
-    if os.stat("mail").st_size == 0:
+    if os.stat("/var/mail/root").st_size == 0:
         pass
     else:
         for adminchatid2 in adminchatid:
-            p = subprocess.Popen(['tail', '/home/tronic/serverbot/mail'], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+            p = subprocess.Popen(['tail', '/var/mail/root'], stdout=subprocess.PIPE,stderr=subprocess.PIPE)
             out, err = p.communicate()
             bot.sendMessage(adminchatid2,out)
-        open('mail','w').close()
+        open('/var/mail/root','w').close()
     time.sleep(1)
