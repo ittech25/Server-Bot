@@ -98,4 +98,4 @@ while 1:
             out, err = p.communicate()
             bot.sendMessage(adminchatid2,out)
         open('/var/mail/root','w').close()
-    time.sleep(1)
+  
