@@ -1,5 +1,5 @@
 #token telegram
-telegrambot = '745422498:AAGfZttQG5jEKHCeFKmMvWeEJftt3V3Dlpk'
+telegrambot = ''
 
 #chat id client
 adminchatid = []
