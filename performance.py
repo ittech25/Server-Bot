@@ -5,11 +5,11 @@ def monitor_performance(chat_id):
     bootTime = datetime.fromtimestamp(psutil.boot_time())
     now = datetime.now()
     cpuPercent = psutil.cpu_percent()
-    serverOnline = "Server online salama : %.1f jam" % (((now - bootTime).total_seconds()) / 3600)
-    memTotal = "Total memory ram : %.2f GB " % (memory.total / 1000000000)
-    memAvail = "Memory ram yang tersedia : %.2f MB" % (memory.available / 1000000)
-    memUse = "Memory ram yang dipakai : " + str(memory.percent) + " %"
-    cpuUse = "Ultilisasi cpu sebanyak : "+ str(cpuPercent) + "%"
+    serverOnline = "Server online : %.1f hours" % (((now - bootTime).total_seconds()) / 3600)
+    memTotal = "Server ram memory : %.2f GB " % (memory.total / 1000000000)
+    memAvail = "Available ram : %.2f MB" % (memory.available / 1000000)
+    memUse = "Ram used : " + str(memory.percent) + " %"
+    cpuUse = "CPU usage : "+ str(cpuPercent) + "%"
     pids = psutil.pids()
     pidsreply = ''
     procs = {}
