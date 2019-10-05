@@ -17,13 +17,13 @@ def monitor_performance(chat_id):
         p = psutil.Process(pid)
         try:
             pmem = p.memory_percent()
-            if pmem > 0.5:
+            if pmem > 0.4:
                 if p.name() in procs:
                     procs[p.name()] += pmem
                 else:
                     procs[p.name()] = pmem
         except:
-            print("Do Nothing")
+            print("Process is not available")
     sortedProcs = sorted(procs.items(), key=operator.itemgetter(1), reverse=True)
     for proc in sortedProcs:
         pidsreply += proc[0]  +  "\n"
@@ -31,6 +31,6 @@ def monitor_performance(chat_id):
             cpuUse + "\n" + \
             memTotal + "\n" + \
             memAvail + "\n" + \
-            memUse + "\n\nService yang sedang berjalan : \n" + \
+            memUse + "\n\nRunning Services: \n" + \
             pidsreply
     bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
