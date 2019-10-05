@@ -2,6 +2,7 @@ import psutil
 import operator
 from datetime import datetime
 
+#sort all process in server by memory usage
 def sortedProcs(pids):
     pidsreply = ''
     procs = {}
@@ -9,7 +10,7 @@ def sortedProcs(pids):
         p = psutil.Process(pid)
         try:
             pmem = p.memory_percent()
-            if pmem > 0.4:
+            if pmem > 0.5:
                 if p.name() in procs:
                     procs[p.name()] += pmem
                 else:
@@ -21,7 +22,7 @@ def sortedProcs(pids):
         pidsreply += proc[0]  +  "\n"
     return pidsreply
     
-
+#print result 
 def monitorPerformance(chat_id):
     memory = psutil.virtual_memory()
     bootTime = datetime.fromtimestamp(psutil.boot_time())
@@ -35,12 +36,12 @@ def monitorPerformance(chat_id):
     allPid = psutil.pids()
     sortedProcsResult = sortedProcs(allPid)
     
-    reply = serverOnline  + "\n" + \
+    result = serverOnline  + "\n" + \
             cpuUse + "\n" + \
             memTotal + "\n" + \
             memAvail + "\n" + \
             memUse + "\n\n Running Services: \n" + \
             sortedProcsResult
     
-    return reply
+    return result
     # bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
