@@ -1,5 +1,4 @@
 from tokens import *
-import psutil
 from datetime import datetime
 from subprocess import Popen, PIPE, STDOUT,call
 import operator
@@ -19,42 +18,8 @@ def clearsemua(chat_id):
         shellexecution.remove(chat_id)
     if chat_id in chdir:
         chdir.remove(chat_id)
-#function ini digunakan untuk melakukan monitoring performa layanan menggunakan library psutil
-#this function is made for monitor performance and service in server
-def monitor_performance(chat_id):
-    memory = psutil.virtual_memory()
-    bootTime = datetime.fromtimestamp(psutil.boot_time())
-    now = datetime.now()
-    cpuPercent = psutil.cpu_percent()
-    serverOnline = "Server online salama : %.1f jam" % (((now - bootTime).total_seconds()) / 3600)
-    memTotal = "Total memory ram : %.2f GB " % (memory.total / 1000000000)
-    memAvail = "Memory ram yang tersedia : %.2f MB" % (memory.available / 1000000)
-    memUse = "Memory ram yang dipakai : " + str(memory.percent) + " %"
-    cpuUse = "Ultilisasi cpu sebanyak : "+ str(cpuPercent) + "%"
-    pids = psutil.pids()
-    pidsreply = ''
-    procs = {}
-    for pid in pids:
-        p = psutil.Process(pid)
-        try:
-            pmem = p.memory_percent()
-            if pmem > 0.5:
-                if p.name() in procs:
-                    procs[p.name()] += pmem
-                else:
-                    procs[p.name()] = pmem
-        except:
-            print("Do Nothing")
-    sortedProcs = sorted(procs.items(), key=operator.itemgetter(1), reverse=True)
-    for proc in sortedProcs:
-        pidsreply += proc[0]  +  "\n"
-    reply = serverOnline  + "\n" + \
-            cpuUse + "\n" + \
-            memTotal + "\n" + \
-            memAvail + "\n" + \
-            memUse + "\n\nService yang sedang berjalan : \n" + \
-            pidsreply
-    bot.sendMessage(chat_id, reply, disable_web_page_preview=True)
+
+
 #this function is not used
 def forwardEmail():
     if os.stat("/var/mail/root").st_size == 0:
