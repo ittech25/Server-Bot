@@ -12,13 +12,32 @@ changeDirectory = []
 stopmarkup = {'keyboard': [['Stop']]}
 hide_keyboard = {'hide_keyboard': True}
 
+#function to exit shell and change directory menu
 def clearAll(chat_id):
     if chat_id in shellExecution:
         shellExecution.remove(chat_id)
     if chat_id in changeDirectory :
         changeDirectory .remove(chat_id)
 
+#Function to change directory
+def changeDir(message,chat_id):
+    p = str(message)
+    if os.path.isdir(p) == 1:
+        os.chdir(p)
+        bot.sendMessage(chat_id,"Directory is change into "+p ,reply_markup=hide_keyboard)
+        clearAll(chat_id)
+    else:
+        bot.sendMessage(chat_id,"Dir is not available")
+#Function to enter a shell command
+def shellCommand(message,chat_id):
+    p = Popen(message.lower() , shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
+    output = p.stdout.read()
+    if output != b'':
+        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
+    else:
+        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
 
+#main class of bot
 class ServerBot(telepot.Bot):
     def __init__(self, *args, **kwargs):
         super(ServerBot, self).__init__(*args, **kwargs)
@@ -28,9 +47,9 @@ class ServerBot(telepot.Bot):
 
     def on_chat_message(self , msg):
         content_type, chat_type, chat_id = telepot.glance(msg)
+        performanceResult = monitorPerformance(chat_id)
         print("User chat id :" +str(chat_id))
         if chat_id in adminchatid:
-            performanceResult = monitorPerformance(chat_id)
             if content_type == 'text':
                 if msg['text'] == '/status' and chat_id not in shellExecution:
                     bot.sendMessage(chat_id, performanceResult, disable_web_page_preview=True)
@@ -44,23 +63,11 @@ class ServerBot(telepot.Bot):
                     bot.sendMessage(chat_id,"Enter direcotry name " , reply_markup=stopmarkup)
                     changeDirectory .append(chat_id)
                 elif chat_id in changeDirectory :
-                    p = str(msg['text'])
-                    if os.path.isdir(p) == 1:
-                        os.chdir (p)
-                        bot.sendMessage(chat_id,"Directory is change into "+p ,reply_markup=hide_keyboard)
-                        clearAll(chat_id)
-                    else:
-                        bot.sendMessage(chat_id,"Dir is not available")
+                    changeDir(msg['text'],chat_id)
                 elif chat_id in shellExecution:
-                    p = Popen(msg['text'].lower() , shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-                    output = p.stdout.read()
-                    if output != b'':
-                        bot.sendMessage(chat_id, output, disable_web_page_preview=True)
-                    else:
-                        bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+                    shellCommand(msg['text'],chat_id)     
         else:
             bot.sendMessage(chat_id, "This user dont have the permission")
-
 
 
 TOKEN = telegrambot
