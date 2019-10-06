@@ -14,7 +14,13 @@
 
 ## Usage
 * Telegram bot key and tokens.pys
-  * Get a key from [BotFather](https://telegram.me/BotFather)
-  *
+  * Create a bot and get a key from [BotFather](https://telegram.me/BotFather)
+  * In tokens.py file. Add your key into telegrambot variable
+    `telegrambot = 'this is your key'`
+  * In tokens.py file. Add your telegram chat id into the adminchatid variable. You can add chat id more than one user.
+    `adminchatid = [7213123,1231231]`
+  * Run the bot using python3 
+    `python3 main.py`
+  
 
 
