@@ -1,6 +1,6 @@
 # Server Monitoring Bot
 ## Installation
-1. Make sure to install python3
+1. Make sure to install python3 and pip. [Python3 Installation Guide](https://realpython.com/installing-python/)
 2. Install psutil and telepot library using pip.
     ```
     pip3 install telepot
