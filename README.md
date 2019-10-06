@@ -24,7 +24,7 @@
     `python3 main.py`
 ## Screenshot
 * /status command
-
+![status](https://raw.githubusercontent.com/jacksonfernando/ServerBot/master/Pitcures/status_command.png?token=AH42UMFECSUDH35A3ZK3ZJS5UL6MY)
   
 
 
