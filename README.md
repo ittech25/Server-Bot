@@ -11,6 +11,7 @@
   * `/status` - give information about memory, cpu usage, etc.
   * `/shell`  - goes into shell executing mode and send you the output
   * `/changedir` - goes into change directory mode and change current directory
+  * `stop` - exit shell executing mode and change directory mode
 
 ## Usage
 * Telegram bot key and tokens.pys
@@ -21,6 +22,9 @@
     `adminchatid = [7213123,1231231]`
   * Run the bot using python3 
     `python3 main.py`
+## Screenshot
+* /status command
+
   
 
 
