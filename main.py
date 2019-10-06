@@ -9,7 +9,7 @@ from performance import monitorPerformance
 
 shellExecution = []
 changeDirectory = []
-stopmarkup = {'keyboard': [['Stop']]}
+stopMarkup = {'keyboard': [['stop']]}
 hide_keyboard = {'hide_keyboard': True}
 
 #function to exit shell and change directory menu
@@ -18,6 +18,7 @@ def clearAll(chat_id):
         shellExecution.remove(chat_id)
     if chat_id in changeDirectory :
         changeDirectory .remove(chat_id)
+
 
 #Function to change directory
 def changeDir(message,chat_id):
@@ -28,6 +29,8 @@ def changeDir(message,chat_id):
         clearAll(chat_id)
     else:
         bot.sendMessage(chat_id,"Dir is not available")
+
+
 #Function to enter a shell command
 def shellCommand(message,chat_id):
     p = Popen(message.lower() , shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
@@ -36,6 +39,7 @@ def shellCommand(message,chat_id):
         bot.sendMessage(chat_id, output, disable_web_page_preview=True)
     else:
         bot.sendMessage(chat_id, "No output.", disable_web_page_preview=True)
+
 
 #main class of bot
 class ServerBot(telepot.Bot):
@@ -57,10 +61,10 @@ class ServerBot(telepot.Bot):
                     clearAll(chat_id)
                     bot.sendMessage(chat_id, "Stop all operation" ,  reply_markup=hide_keyboard)
                 elif msg['text'] == '/shell' and chat_id  not in shellExecution:
-                    bot.sendMessage(chat_id, "Enter shell command" , reply_markup=stopmarkup)
+                    bot.sendMessage(chat_id, "Enter shell command" , reply_markup=stopMarkup)
                     shellExecution.append(chat_id)
-                elif msg['text'] == '/chdir':
-                    bot.sendMessage(chat_id,"Enter direcotry name " , reply_markup=stopmarkup)
+                elif msg['text'] == '/changedir':
+                    bot.sendMessage(chat_id,"Enter directory name " , reply_markup=stopMarkup)
                     changeDirectory .append(chat_id)
                 elif chat_id in changeDirectory :
                     changeDir(msg['text'],chat_id)
