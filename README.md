@@ -26,6 +26,14 @@
 * /status command
 
 ![status](https://raw.githubusercontent.com/jacksonfernando/ServerBot/master/Pitcures/status_command.png?token=AH42UMFECSUDH35A3ZK3ZJS5UL6MY)
+
+* /shell command
+
+![shell](https://raw.githubusercontent.com/jacksonfernando/ServerBot/master/Pitcures/shell_command.png?token=AH42UMC52ASKMVDN77TTQFK5UMAZI)
+
+* /changedir command
+
+![changedir](https://raw.githubusercontent.com/jacksonfernando/ServerBot/master/Pitcures/changedir_command.png?token=AH42UMERCRODQSQOWN4GPTC5UMAYI)
   
 
 
